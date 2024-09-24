@@ -1,0 +1,8 @@
+main_*
+*.out
+*.swp
+*.o
+*.swo
+.vscode
+test_*
+*.a
