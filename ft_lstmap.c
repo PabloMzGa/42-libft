@@ -6,13 +6,13 @@
 /*   By: pabmart2 <pabmart2@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:27:04 by pabmart2          #+#    #+#             */
-/*   Updated: 2024/09/24 13:40:33 by pabmart2         ###   ########.fr       */
+/*   Updated: 2024/09/24 17:21:36 by pabmart2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_error(t_list **start, t_list *new, void (*del)(void *))
+static void	free_error(t_list **start, t_list *new, void (*del)(void *))
 {
 	ft_lstclear(start, del);
 	ft_lstdelone(new, del);

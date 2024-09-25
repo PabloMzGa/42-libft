@@ -6,7 +6,7 @@
 /*   By: pabmart2 <pabmart2@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:17:00 by pabmart2          #+#    #+#             */
-/*   Updated: 2024/09/24 13:24:10 by pabmart2         ###   ########.fr       */
+/*   Updated: 2024/09/25 21:52:37 by pabmart2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,31 @@
 # define LIBFT_H
 
 # include <limits.h>
+# include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+/**
+ * Converts an integer pointer to a string representation in a specified base.
+ *
+ * @param nbr The integer pointer to be converted.
+ * @param base The base to be used for conversion. It should be a string
+ * containing all the characters representing the digits of the base.
+ */
+char				*ft_uintptrtob(uintptr_t nbr, char *base);
+
+/**
+ * Converts an unsigned integer to a string representation in a specified base.
+ *
+ * @param nbr The unsigned integer to convert.
+ * @param base The base to use for the conversion. This should be a string
+ *             containing the characters representing the digits of the base
+ *             (e.g., "0123456789ABCDEF" for base 16).
+ * @return A pointer to the newly allocated string containing the base
+ *         representation of the number. The caller is responsible for freeing
+ *         the allocated memory.
+ */
+char				*ft_uitob(unsigned int nbr, char *base);
 
 /**
  * Checks if the given character is alphabetic.
@@ -392,6 +415,19 @@ char				**ft_split(char const *s, char c);
  *         memory allocation fails.
  */
 char				*ft_itoa(int n);
+
+/**
+ * @brief Converts an unsigned integer to a null-terminated string.
+ *
+ * This function takes an unsigned integer and converts it to a string
+ * representation. The resulting string is dynamically allocated and
+ * must be freed by the caller.
+ *
+ * @param n The unsigned integer to convert.
+ * @return A pointer to the newly allocated string representing the number,
+ *         or NULL if memory allocation fails.
+ */
+char				*ft_uitoa(unsigned int n);
 
 /**
  * @brief Applies a function to each character of a string to create a new
