@@ -6,7 +6,7 @@
 /*   By: pabmart2 <pabmart2@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 17:39:57 by pabmart2          #+#    #+#             */
-/*   Updated: 2024/09/25 21:52:08 by pabmart2         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:38:53 by pabmart2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ static size_t	count_base_c(unsigned int un, unsigned int base_l,
 
 char	*ft_uitob(unsigned int nbr, char *base)
 {
-	size_t			base_l;
-	char			*str;
+	size_t	base_l;
+	char	*str;
 
 	base_l = ft_strlen(base);
 	str = ft_calloc(count_base_c(nbr, base_l, 0) + 1, sizeof(char));
