@@ -6,7 +6,7 @@
 /*   By: pabmart2 <pabmart2@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:17:00 by pabmart2          #+#    #+#             */
-/*   Updated: 2024/09/26 13:42:08 by pabmart2         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:29:20 by pabmart2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "ft_printf/ft_printf.h"
 
 /**
  * @brief A structure representing a node in a linked list.
