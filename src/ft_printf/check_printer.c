@@ -6,11 +6,11 @@
 /*   By: pabmart2 <pabmart2@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 15:42:26 by pabmart2          #+#    #+#             */
-/*   Updated: 2024/11/21 18:32:16 by pabmart2         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:22:35 by pabmart2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ft_printf/ft_printf.h"
+#include "ft_printf.h"
 
 /**
  * @brief This file defines an array of structures that map format specifiers

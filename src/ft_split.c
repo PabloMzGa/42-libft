@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabmart2 <pabmart2@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: pablo <pablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 18:26:29 by pabmart2          #+#    #+#             */
-/*   Updated: 2024/11/21 18:31:10 by pabmart2         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:22:05 by pablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "libft.h"
 
 /**
  * @brief Splits a string into substrings based on a delimiter.
@@ -55,10 +55,8 @@ static char	**set_substrs(char const *s, char **str_cont, char c,
 	}
 	return (str_cont);
 }
-
 /**
-
-* @brief Counts the number of tokens in a string separated by a given delimiter.
+ * @brief Counts the number of tokens in a string separated by a given delimiter.
  *
  * This function iterates through the input string `s` and counts the number of
  * tokens separated by the character `c`. A token is defined as a contiguous
@@ -67,7 +65,10 @@ static char	**set_substrs(char const *s, char **str_cont, char c,
  * @param s The input string to be tokenized.
  * @param c The delimiter character used to separate tokens.
  * @return The number of tokens found in the input string.
+ *
+ * @todo Change this with ft_strtkns and test it
  */
+
 static size_t	count_tokens(char const *s, char c)
 {
 	size_t	counter;

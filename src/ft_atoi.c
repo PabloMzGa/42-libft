@@ -6,29 +6,11 @@
 /*   By: pabmart2 <pabmart2@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:23:00 by pabmart2          #+#    #+#             */
-/*   Updated: 2024/11/21 18:31:10 by pabmart2         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:37:52 by pabmart2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
-
-/**
- * @brief Checks if a character is a whitespace character.
- *
- * This function determines if the given character is a whitespace character.
- * Whitespace characters include space (' '), horizontal tab ('\t'),
- * vertical tab ('\v'), newline ('\n'), carriage return ('\r'),
- * and form feed ('\f').
- *
- * @param c The character to check.
- * @return 1 if the character is a whitespace character, 0 otherwise.
- */
-static int	ft_isspace(char c)
-{
-	if ((c >= '\t' && c <= '\r') || c == ' ')
-		return (1);
-	return (0);
-}
+#include "libft.h"
 
 int	ft_atoi(const char *nptr)
 {

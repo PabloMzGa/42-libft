@@ -6,7 +6,7 @@
 /*   By: pabmart2 <pabmart2@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:17:00 by pabmart2          #+#    #+#             */
-/*   Updated: 2024/11/21 18:29:20 by pabmart2         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:48:29 by pabmart2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,21 @@
 
 # define LIBFT_H
 
+/**
+ * float.h tiene un bug en la norminette porque es el nombre de un tipo
+ * y la norminette lo interpreta de otra forma:
+ * https://github.com/42School/norminette/issues/470
+ */
+# include <float.h>
 # include <limits.h>
+# include <math.h>
+# include <stdarg.h>
 # include <stdint.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "ft_get_next_line/ft_get_next_line.h"
 # include "ft_printf/ft_printf.h"
-
 /**
  * @brief A structure representing a node in a linked list.
  *
@@ -106,6 +115,14 @@ int					ft_isalpha(int c);
 int					ft_isascii(int c);
 
 /**
+ * Checks if the given character is numeric.
+ *
+ * @param c The character to be checked.
+ * @return 1 if the character is numeric, 0 otherwise.
+ */
+int					ft_isdigit(int c);
+
+/**
  * Checks if the given character is printable
  *
  * @param c The character to be checked.
@@ -114,12 +131,17 @@ int					ft_isascii(int c);
 int					ft_isprint(int c);
 
 /**
- * Checks if the given character is numeric.
+ * @brief Checks if a character is a whitespace character.
  *
- * @param c The character to be checked.
- * @return 1 if the character is numeric, 0 otherwise.
+ * This function determines if the given character is a whitespace character.
+ * Whitespace characters include space (' '), horizontal tab ('\t'),
+ * vertical tab ('\v'), newline ('\n'), carriage return ('\r'),
+ * and form feed ('\f').
+ *
+ * @param c The character to check.
+ * @return 1 if the character is a whitespace character, 0 otherwise.
  */
-int					ft_isdigit(int c);
+int					ft_isspace(char c);
 
 /**
  * @brief Converts an integer to a null-terminated string.
@@ -182,6 +204,22 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
  *            list element.
  */
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
+
+/**
+ * @brief Retrieves the content of the node at a specified index in a linked
+ * list.
+ *
+ * This function traverses the linked list until it reaches the node at the
+ * given index and returns the content of that node. If the index is out of
+ * bounds, it returns NULL.
+ *
+ * @param lst A pointer to the first node of the linked list.
+ * @param index The zero-based index of the node whose content is to be
+ *              retrieved.
+ * @return The content of the node at the specified index, or NULL if the index
+ *         is out of bounds.
+ */
+void				*ft_lstindex(t_list *lst, unsigned int index);
 
 /**
  * @brief Iterates over a list and applies a function to each element.
@@ -252,6 +290,56 @@ t_list				*ft_lstnew(void *content);
 int					ft_lstsize(t_list *lst);
 
 /**
+ * @brief Frees a dynamically allocated 2D array.
+ *
+
+	* This function frees each element of a 2D array and then frees the array itself.
+ * It can handle arrays where the size is known or unknown.
+ *
+ * @param array The 2D array to be freed.
+ * @param size The number of elements in the array. If size is 0, the function
+ *             will free elements until a NULL pointer is encountered.
+ */
+void				ft_matrix_free(void **array, size_t size);
+
+/**
+ * @brief Calculates the length of a null-terminated array of pointers.
+ *
+ * This function iterates through the array of pointers until it encounters
+ * a null pointer, counting the number of elements in the array.
+ *
+ * @param array A null-terminated array of pointers.
+ * @return The number of elements in the array, excluding the null pointer.
+ */
+size_t				ft_matrix_len(void **array);
+
+/**
+ * @brief Finds the maximum value in a specified column of a 2D array.
+ *
+ * This function iterates through a specified column of a 2D array and returns
+ * the maximum value found in that column.
+ *
+ * @param array A pointer to the 2D array of doubles.
+ * @param size The number of rows in the 2D array.
+ * @param pos The index of the column to search for the maximum value.
+ * @return The maximum value found in the specified column.
+ */
+double				ft_matrix_maxcol(double **array, size_t size, size_t pos);
+
+/**
+ * @brief Finds the minimum value in a specified column of a 2D array.
+ *
+ * This function iterates through a 2D array and finds the minimum value
+ * in the specified column (pos).
+ *
+ * @param array A pointer to the 2D array of doubles.
+ * @param size The number of rows in the 2D array.
+ * @param pos The column index to search for the minimum value.
+ * @return The minimum value found in the specified column.
+ */
+double				ft_matrix_mincol(double **array, size_t size, size_t pos);
+
+/**
  * Searches for the first occurrence of a byte in a block of memory.
  *
  * @param s Pointer to the block of memory to be searched.
@@ -295,6 +383,23 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 
 /**
+ * @brief Joins two memory blocks into a new memory block.
+ *
+ * This function allocates a new memory block and copies the contents of the
+ * first memory block (m1) followed by the contents of the second memory
+ * block (m2) into the new memory block.
+ *
+ * @param m1 Pointer to the first memory block.
+ * @param n1 Size of the first memory block in bytes.
+ * @param m2 Pointer to the second memory block.
+ * @param n2 Size of the second memory block in bytes.
+ * @return Pointer to the newly allocated memory block containing the joined
+ * contents of m1 and m2. Returns NULL if both m1 and m2 are NULL or if memory
+ * allocation fails.
+ */
+void				*ft_memjoin(void *m1, size_t n1, const void *m2, size_t n2);
+
+/**
  * @brief Copies a block of memory, allowing overlapping regions.
  *
  * This function copies `n` bytes from the memory area pointed to by `src`
@@ -324,6 +429,43 @@ void				*ft_memmove(void *dest, const void *src, size_t n);
  * @return Pointer to the memory area s.
  */
 void				*ft_memset(void *s, int c, size_t n);
+
+/**
+ * @file ft_mindbl.c
+ * @brief Finds the position of the minimum value in an array of doubles.
+ *
+ * This function iterates through an array of doubles and returns the index
+ * of the smallest value found in the array.
+ *
+ * @param array A pointer to the array of doubles.
+ * @param size The number of elements in the array.
+ * @return The index of the minimum value in the array.
+ */
+size_t				ft_mindbl(double *array, size_t size);
+
+/**
+ * ft_minint - Finds the position of the minimum integer in an array.
+ * @array: The array of integers.
+ * @size: The size of the array.
+ *
+ * This function iterates through the given array to find the position
+ * of the smallest integer. It returns the index of the minimum integer.
+ *
+ * @return: The index of the minimum integer in the array.
+ * @todo: Try better search algorithm (Ex: binary search)
+ */
+size_t				ft_minint(int *array, size_t size);
+
+/**
+ * @brief A function that does nothing with the given content.
+ *
+ * This function is a placeholder that takes a single argument of type void*
+ * and does nothing with it. It is useful in situations where a function
+ * pointer is required, but no operation is needed.
+ *
+ * @param content A pointer to any type of data. This parameter is not used.
+ */
+void				ft_nothing(void *content);
 
 /**
  * @brief Writes a character to the specified file descriptor.
@@ -371,9 +513,26 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr_fd(char *s, int fd);
 
 /**
+ * @brief Reallocates a memory block with a new size.
+ *
+ * This function reallocates a given memory block to a new size. If the new size
+ * is zero and the pointer is not NULL, the memory block is freed. If the
+ * pointer is NULL, the function behaves like malloc. If the allocation fails,
+ * NULL is returned.
+ *
+ * @param ptr Pointer to the memory block to be reallocated. If NULL,
+ *            a new block is allocated.
+ * @param old_size The size of the original memory block.
+ * @param size The new size for the memory block.
+ * @return A pointer to the newly allocated memory block, or NULL if the
+ *         allocation fails.
+ */
+void				*ft_realloc(void *ptr, size_t old_size, size_t size);
+
+/**
  * @brief Splits a string into an array of substrings based on a delimiter.
  *
- * This function takes a string `s` a nd a delimiter character `c`, and splits
+ * This function takes a string `s` and a delimiter character `c`, and splits
  * the string into an array of substrings. The substrings are allocated
  * dynamically and stored in an null endeded array of strings,
  * which is returned.
@@ -385,6 +544,22 @@ void				ft_putstr_fd(char *s, int fd);
  *         NULL is returned.
  */
 char				**ft_split(char const *s, char c);
+
+/**
+ * @brief Splits a string into an array of substrings based on multiple
+ *        delimiters.
+ *
+ * This function splits the input string s into an array of substrings,
+ * using any of thecharacters in @cs as delimiters. The resulting array of
+ * substrings is dynamically allocatedand must be freed by the caller.
+ * The last element of the array is set to NULL.
+ *
+ * @param cs A string containing the delimiter characters.
+ * @param s The input string to be split.
+ * @return A pointer to the array of substrings, or NULL if memory
+ *         allocation fails.
+ */
+char				**ft_splitm(char const *s, char *cs);
 
 /**
  * @brief Searches for the first occurrence of a character in a string.
@@ -401,6 +576,26 @@ char				**ft_split(char const *s, char c);
  *         not found.
  */
 char				*ft_strchr(const char *s, int c);
+
+/**
+ * @brief Custom string search function.
+ *
+ * This function searches for the first occurrence of any character from the
+ * array `c` in the string `s`. If a character from `c` is found in `s`, a
+ * pointer to the character in `s` is returned. If no character from `c` is
+ * found, NULL is returned.
+ *
+ * @param s The string to be searched.
+ * @param c An array of integers representing the characters to search for.
+ * @return A pointer to the first occurrence of any character from `c` in `s`,
+ *         or NULL if no such character is found.
+ *
+ * @note The function allocates memory for an unsigned char array to store the
+ *       characters from `c`. This memory is freed before the function returns.
+ *       If memory allocation fails, the function returns NULL and prints an
+ *       error message.
+ */
+char				*ft_strchrm(const char *s, char *c);
 
 /**
  * @brief Duplicates a string.
@@ -516,6 +711,20 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /**
+ * @brief Duplicates up to n characters from the given string.
+ *
+ * This function allocates memory and duplicates up to n characters from the
+ * input string `s`. If `n` is greater than the length of the string, the
+ * entire string is duplicated. The duplicated string is null-terminated.
+ *
+ * @param s The input string to duplicate.
+ * @param n The maximum number of characters to duplicate.
+ * @return A pointer to the newly allocated string, or NULL if memory
+ * allocation fails.
+ */
+char				*ft_strndup(const char *s, size_t n);
+
+/**
  * Locates the first occurrence of the null-terminated string 'little'
  * within the null-terminated string 'big', where not more than 'len'
  * characters are searched.
@@ -547,6 +756,20 @@ char				*ft_strnstr(const char *big, const char *little,
  *         NULL if not found.
  */
 char				*ft_strrchr(const char *s, int c);
+
+/**
+ * @brief Counts the number of tokens in a string separated by any of the
+ *        characters in the given set.
+ * This function scans the input string "s" and counts the number of tokens
+ * separated by any of the characters in the set "cs". A token is defined as a
+ * contiguous sequence of characters that are not in the set "cs".
+ *
+ * @param s: The input string to be tokenized.
+ * @param cs: The set of delimiter characters.
+ *
+ * @return The number of tokens found in the input string.
+ */
+size_t				ft_strtkns(char const *s, char *cs);
 
 /**
  * @brief Trims characters from the beginning and end of a string.
@@ -641,5 +864,184 @@ char				*ft_uitoa(unsigned int n);
  *         the allocated memory.
  */
 char				*ft_uitob(unsigned int nbr, char *base);
+
+/**
+ * @brief the absolute value of each element in a vector.
+ *
+ * This function allocates memory for a new vector and fills it with the
+ * absolute values of the elements in the input vector. If memory allocation
+ * fails, the function returns NULL.
+ *
+ * @param vect A pointer to the input vector of doubles.
+ * @param d The dimension (number of elements) of the vector.
+ * @return A pointer to the new vector containing the absolute values, or
+ *         NULL if memory allocation fails.
+ * @note The caller is responsible of freeing the returned vector.
+ */
+double				*ft_vect_abs(double *vect, size_t d);
+
+/**
+ * @brief Adds two vectors element-wise.
+ *
+ * This function takes two vectors (arrays of doubles) and their dimension,
+ * and returns a new vector where each element is the sum of the corresponding
+ * elements in the input vectors.
+ *
+ * @param v1 The first input vector.
+ * @param v2 The second input vector.
+ * @param d The dimension of the vectors.
+ * @return A new vector containing the element-wise sum of v1 and v2,
+ *         or NULL if either input vector is NULL or if memory allocation fails.
+ * @note The caller is responsible of freeing the returned vector.
+ */
+double				*ft_vect_add(double *v1, double *v2, size_t d);
+
+/**
+ * @brief Computes the cross product of two 3-dimensional vectors.
+ *
+ * This function calculates the cross product of two vectors `v1` and `v2`,
+ * each of which must be 3-dimensional. The cross product is a vector that
+ * is perpendicular to both `v1` and `v2`.
+ *
+ * @param v1 A pointer to the first 3-dimensional vector.
+ * @param v2 A pointer to the second 3-dimensional vector.
+ * @param d The dimension of the vectors, which must be 3.
+ * @return A pointer to the resulting 3-dimensional vector, or NULL if an
+ *         error occurs (e.g., if the dimension is not 3 or memory allocation
+ *         fails).
+ *
+ * @note The caller is responsible for freeing the memory allocated for the
+ *       resulting vector.
+ */
+double				*ft_vect_cross(double *v1, double *v2, size_t d);
+
+/**
+ * @brief Divides each element of a vector by a given number.
+ *
+ * This function takes a vector of doubles and divides each element by the
+ * specified number. The result is stored in a newly allocated vector.
+ *
+ * @param vect Pointer to the input vector of doubles.
+ * @param n The number by which each element of the vector will be divided.
+ * @param d The number of elements in the vector.
+ * @return A pointer to the newly allocated vector containing the results,
+ *         or NULL if the input vector is NULL or memory allocation fails.
+ * @note The caller is responsible of freeing the returned vector.
+ */
+double				*ft_vect_div(double *vect, double n, size_t d);
+/**
+ * @brief Computes the dot product of two vectors.
+ *
+ * This function calculates the dot product of two vectors `v1` and `v2` of
+ * dimension `d`. The dot product is the sum of the products of the
+ * corresponding entries of the two vectors.
+ *
+ * @param v1 Pointer to the first vector.
+ * @param v2 Pointer to the second vector.
+ * @param d The dimension of the vectors.
+ * @return The dot product of the two vectors.
+ */
+double				ft_vect_dot(double *v1, double *v2, size_t d);
+
+/**
+ * @brief Computes the magnitude of a vector.
+ *
+ * This function calculates the magnitude (Euclidean norm) of a vector
+ * with a given dimension.
+ *
+ * @param vect A pointer to the array representing the vector.
+ * @param d The dimension of the vector.
+ * @return The magnitude of the vector.
+ */
+double				ft_vect_magn(double *vect, size_t d);
+
+/**
+ * @brief Normalizes a vector.
+ *
+ * This function takes a vector and its dimension, and returns a normalized
+ * version of the vector. Normalization is done by dividing the vector by its
+ * magnitude.
+ *
+ * @param vect The vector to be normalized.
+ * @param d The dimension of the vector.
+ * @return A pointer to the normalized vector.
+ * @note The caller is responsible of freeing the returned vector.
+ */
+double				*ft_vect_norm(double *vect, size_t d);
+
+/**
+ * @brief Computes the orthogonal projection of a point onto a plane.
+ *
+ * This function calculates the orthogonal projection of a point `p_point` onto
+ * a plane defined by a point `a_point` and a normal vector `normal` in a given
+ * dimension.
+ *
+ * @param a_point A pointer to the coordinates of a point on the plane.
+ * @param normal A pointer to the coordinates of the normal vector of the plane.
+ * @param p_point A pointer to the coordinates of a point of the plane.
+ * @param dimension The number of dimensions of the space.
+ * @return A pointer to the coordinates of the projected point
+ *         Returns NULL if the dimension is zero.
+ * @note The caller is responsible of freeing the returned vector.
+ */
+double				*ft_vect_ortproj(double *a_point, double *normal,
+						double *p_point, size_t dimension);
+
+/**
+ * @file ft_vectprod.c
+ * @brief Multiplies each element of a vector by a scalar.
+ *
+ * This function takes a scalar value `n`, a pointer to a vector `v`, and the
+ * dimension `d` of the vector. It returns a new vector where each element is
+ * the product of the corresponding element in `v` and the scalar `n`.
+ *
+ * @param n The scalar value to multiply each element of the vector by.
+ * @param v A pointer to the vector to be multiplied.
+ * @param d The dimension of the vector.
+ * @return A pointer to the resulting vector, or NULL if the input vector is
+ *         NULL or memory allocation fails.
+ * @note The caller is responsible of freeing the returned vector.
+ */
+double				*ft_vect_prod(double *vect, double n, size_t d);
+
+/**
+ * @brief Rotates a 3D vector around the Z-axis by a given angle in radians.
+ *
+ * This function takes a 3D vector and rotates it around the Z-axis by the
+ * specified angle in radians. The rotation is performed with respect to a
+ * given origin point.
+ *
+ * @param vect The 3D vector to be rotated. It is an array of three doubles
+ *             representing the x, y, and z coordinates of the vector.
+ * @param origin The origin point around which the vector is rotated. It is
+ *               an array of three doubles representing the x, y, and z
+ *               coordinates of the origin.
+ * @param radians The angle in radians by which the vector is to be rotated
+ *                around the Z-axis.
+ * @return A newly allocated array of three doubles representing the rotated
+ *         vector's x, y, and z coordinates. If memory allocation fails, the
+ *         function returns NULL.
+ *
+ * @note The caller is responsible for freeing the memory allocated for the
+ *       returned vector.
+ */
+double				*ft_vect_rotz3d(double *vect, double *origin,
+						double radians);
+
+/**
+ * @brief Subtracts two vectors element-wise.
+ *
+ * This function takes two vectors `v1` and `v2` of dimension `d` and
+ * returns a new vector which is the result of element-wise subtraction
+ * of `v2` from `v1`.
+ *
+ * @param v1 Pointer to the first vector.
+ * @param v2 Pointer to the second vector.
+ * @param d Dimension of the vectors.
+ * @return A pointer to the resulting vector after subtraction, or NULL
+ *         if either input vector is NULL or memory allocation fails.
+ * @note The caller is responsible of freeing the returned vector.
+ */
+double				*ft_vect_sub(double *v1, double *v2, size_t d);
 
 #endif
