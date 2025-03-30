@@ -22,7 +22,7 @@ SRC = \
 	src/ft_errfree.c \
 	src/ft_free.c \
 	src/ft_get_next_line.c \
-	src/ft_get_env.c \
+	src/ft_getenv.c \
 	src/ft_isalnum.c \
 	src/ft_isalpha.c \
 	src/ft_isascii.c \
