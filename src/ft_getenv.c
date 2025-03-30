@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   x_up_printer.c                                     :+:      :+:    :+:   */
+/*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pablo <pablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 21:08:11 by pabmart2          #+#    #+#             */
-/*   Updated: 2025/03/29 16:35:53 by pablo            ###   ########.fr       */
+/*   Created: 2025/03/22 13:44:06 by pablo             #+#    #+#             */
+/*   Updated: 2025/03/30 01:32:53 by pablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	x_up_printer(va_list arg)
+char	*ft_getenv(const char *env_var)
 {
-	char			*str;
-	unsigned int	un;
-	size_t			len;
+	extern char	**environ;
+	char		**env;
+	size_t		len;
 
-	un = (unsigned int)va_arg(arg, int);
-	str = ft_uitob(un, "0123456789ABCDEF");
-	ft_putstr_fd(str, 1);
-	len = ft_strlen(str);
-	ft_free((void **)&str);
-	return (len);
+	if (!env_var)
+		return (NULL);
+	len = ft_strlen(env_var);
+	env = environ;
+	while (*env)
+	{
+		if (ft_strncmp(*env, env_var, len) == 0 && (*env)[len] == '=')
+			return (*env + len + 1);
+		env++;
+	}
+	return (NULL);
 }

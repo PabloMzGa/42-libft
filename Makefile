@@ -6,7 +6,7 @@
 #    By: pablo <pablo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/20 14:34:30 by pabmart2          #+#    #+#              #
-#    Updated: 2025/03/13 20:52:39 by pablo            ###   ########.fr        #
+#    Updated: 2025/03/28 17:42:49 by pablo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,10 @@ SRC = \
 	src/ft_atoi.c \
 	src/ft_bzero.c \
 	src/ft_calloc.c \
+	src/ft_errfree.c \
+	src/ft_free.c \
 	src/ft_get_next_line.c \
+	src/ft_get_env.c \
 	src/ft_isalnum.c \
 	src/ft_isalpha.c \
 	src/ft_isascii.c \
@@ -50,6 +53,7 @@ SRC = \
 	src/ft_mindbl.c \
 	src/ft_minint.c  \
 	src/ft_nothing.c \
+	src/ft_perror.c \
 	src/ft_putchar_fd.c \
 	src/ft_putendl_fd.c \
 	src/ft_putnbr_fd.c \

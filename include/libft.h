@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pabmart2 <pabmart2@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: pablo <pablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:17:00 by pabmart2          #+#    #+#             */
-/*   Updated: 2025/03/14 17:48:29 by pabmart2         ###   ########.fr       */
+/*   Updated: 2025/03/29 15:07:16 by pablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 # define LIBFT_H
 
+# include <errno.h>
 /**
- * float.h tiene un bug en la norminette porque es el nombre de un tipo
- * y la norminette lo interpreta de otra forma:
+ * float.h has a bug in the norminette because it is the name of a type
+ * and the norminette interprets it differently:
  * https://github.com/42School/norminette/issues/470
  */
 # include <float.h>
@@ -87,6 +88,47 @@ void				ft_bzero(void *s, size_t n);
  * @note If memory allocation fails, errno is set to ENOMEM.
  */
 void				*ft_calloc(size_t nmemb, size_t size);
+
+/**
+ * @brief Frees the memory pointed to by the given pointer and sets it to NULL.
+ *
+ * This function takes a double pointer to a memory location, frees the memory
+ * it points to, and then sets the pointer to NULL to avoid dangling pointers.
+ *
+ * @param ptr A double pointer to the memory to be freed. The pointer itself
+ *            must not be NULL, but the memory it points to can be NULL.
+ *
+ * @note It is the caller's responsibility to ensure that the pointer passed
+ *       to this function was allocated dynamically (e.g., using malloc, calloc,
+ *       or realloc).
+ */
+void ft_free(void **ptr);
+
+/**
+ * @brief Frees a pointer, prints an error message, and optionally exits.
+ *
+ * Frees a dynamically allocated pointer, prints an error message, and
+ * optionally terminates the program.
+ *
+ * @param msg Error message to be printed.
+ * @param err Error code for the message.
+ * @param exit Non-zero to terminate the program.
+ * @param ptr Double pointer to the memory to free.
+ */
+void ft_errfree(char *msg, char err, char exit, void **ptr);
+
+/**
+ * @brief Retrieves the value of an environment variable.
+ *
+ * This function searches the environment list for a string that matches the
+ * environment variable name provided in `env_var`. If a match is found, the
+ * function returns a pointer to the value of the environment variable.
+ *
+ * @param env_var The name of the environment variable to search for.
+ * @return A pointer to the value of the environment variable if found,
+ *         otherwise NULL.
+ */
+char	*ft_getenv(const char *env_var);
 
 /**
  * Checks if the given character is alphanumeric.
@@ -468,6 +510,19 @@ size_t				ft_minint(int *array, size_t size);
 void				ft_nothing(void *content);
 
 /**
+ * @brief Custom perror function with error and exit handling.
+ *
+ * This function prints a custom error message using perror, sets the errno
+ * value if provided, and exits the program with a specified exit value.
+ *
+ * @param message The custom error message to be printed.
+ * @param err_val The error value to set errno to. If 0, errno is not modified.
+ * @param exit_value The value to exit the program with. If 0,
+ *                   the program does not exit.
+ */
+void	ft_perror(char message[], char err_val, char exit_value);
+
+/**
  * @brief Writes a character to the specified file descriptor.
  *
  * This function takes a character and a file descriptor as arguments and writes
@@ -733,8 +788,8 @@ char				*ft_strndup(const char *s, size_t n);
  * @param little The string to search for.
  * @param len The maximum number of characters to search.
  *
- * @return (If 'little' is an empty string,
-	'big' is returned); if 'little' occurs
+ * @return If 'little' is an empty string,
+	'big' is returned; if 'little' occurs
  *         nowhere in 'big', NULL is returned; otherwise, a pointer to the first
  *         character of the first occurrence of 'little' is returned.
  */
