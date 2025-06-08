@@ -6,7 +6,7 @@
 #    By: pablo <pablo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/20 14:34:30 by pabmart2          #+#    #+#              #
-#    Updated: 2025/03/30 01:40:07 by pablo            ###   ########.fr        #
+#    Updated: 2025/04/09 11:09:55 by pablo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ NAME = libft.a
 
 SRC = \
 	src/ft_atoi.c \
+	src/ft_atol.c \
 	src/ft_bzero.c \
 	src/ft_calloc.c \
 	src/ft_errfree.c \
