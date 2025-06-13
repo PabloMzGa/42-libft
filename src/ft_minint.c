@@ -6,7 +6,7 @@
 /*   By: pabmart2 <pabmart2@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:17:34 by pablo             #+#    #+#             */
-/*   Updated: 2025/03/14 17:37:09 by pabmart2         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:16:15 by pabmart2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ size_t	ft_minint(int *array, size_t size)
 	min_pos = 0;
 	while (i < size)
 	{
-		if (min < array[i])
+		if (min > array[i])
 		{
 			min_pos = i;
 			min = array[i];
 		}
+		++i;
 	}
 	return (min_pos);
 }

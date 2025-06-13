@@ -6,7 +6,7 @@
 /*   By: pabmart2 <pabmart2@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 17:38:43 by pablo             #+#    #+#             */
-/*   Updated: 2025/03/31 22:11:34 by pabmart2         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:17:23 by pabmart2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free(void **ptr)
 {
-	if (*ptr)
+	if (ptr && *ptr)
 	{
 		free(*ptr);
 		*ptr = NULL;
