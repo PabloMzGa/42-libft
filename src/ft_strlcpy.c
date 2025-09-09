@@ -6,7 +6,7 @@
 /*   By: pablo <pablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 23:08:28 by pabmart2          #+#    #+#             */
-/*   Updated: 2025/03/13 20:22:05 by pablo            ###   ########.fr       */
+/*   Updated: 2025/09/09 12:22:01 by pablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 
 	i = 0;
 	src_length = ft_strlen(src);
+	if (size == 0)
+		return (0);
 	if (src_length == 0)
 	{
 		dst[0] = '\0';

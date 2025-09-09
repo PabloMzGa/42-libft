@@ -6,7 +6,7 @@
 /*   By: pablo <pablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 18:26:29 by pabmart2          #+#    #+#             */
-/*   Updated: 2025/03/29 16:36:20 by pablo            ###   ########.fr       */
+/*   Updated: 2025/09/09 12:42:25 by pablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char	**ft_split(char const *s, char c)
 	char	**str_cont;
 
 	c_count = count_tokens(s, c);
-	str_cont = malloc(sizeof(char *) * (c_count + 1));
+	str_cont = ft_calloc(c_count + 1, sizeof(char *));
 	if (!str_cont)
 		return (NULL);
 	if (!set_substrs(s, str_cont, c, c_count))
